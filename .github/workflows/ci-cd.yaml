@@ -65,9 +65,9 @@ jobs:
           export KUBECONFIG=$PWD/kubeconfig
 
       - name: Update image tag
-        run: sed -i "s|IMAGE_TAG|${{ github.sha }}|g" deployment.yaml
+        run: sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/deployment.yaml
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f deployment.yaml
+          kubectl apply -f k8s/deployment.yaml
           kubectl rollout status deployment/myapp --timeout=120s
