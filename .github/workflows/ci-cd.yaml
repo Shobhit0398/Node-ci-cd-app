@@ -54,12 +54,12 @@ jobs:
       - name: Build and push Docker image (amd64)
         uses: docker/build-push-action@v5
         with:
-        context: .
-        platforms: linux/amd64
-        push: true
-        tags: |
-          ${{ env.DOCKERHUB_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          ${{ env.DOCKERHUB_NAMESPACE }}/${{ env.IMAGE_NAME }}:latest
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ env.DOCKERHUB_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.DOCKERHUB_NAMESPACE }}/${{ env.IMAGE_NAME }}:latest
 
 
   deploy-k8s:
@@ -88,7 +88,7 @@ jobs:
 
 
       - name: Update image tag
-        run: sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/deployment.yaml
+        run: sed -i.bak "s|IMAGE_TAG|${{ github.sha }}|g" k8s/deployment.yaml
 
       - name: Deploy to Kubernetes
         run: |
