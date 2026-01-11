@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: myapp
-          image: shobhitnagar/myapp:IMAGE_TAG
+          image: shobhitnagar/myapp:latest
           ports:
             - containerPort: 3001
 

@@ -86,10 +86,9 @@ jobs:
           kubectl get nodes
 
 
-      - name: Update image tag
-        run: sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/deployment.yaml
-
-      - name: Deploy to Kubernetes
+      - name: Deploy
         run: |
-          kubectl apply -f k8s/deployment.yaml
+          kubectl set image deployment/myapp \
+            myapp=shobhitnagar/myapp:${{ github.sha }}
           kubectl rollout status deployment/myapp --timeout=120s
+
